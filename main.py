@@ -19,6 +19,14 @@ def find_student_by_id(student_id):
     return None
 
 
+def generate_new_id():
+    # Генерирует новый уникальный ID: максимальный существующий ID + 1.
+    # Не зависит от длины списка, поэтому после удаления студентов ID не дублируются.
+    if not students_db:
+        return 1
+    return max(student["id"] for student in students_db) + 1
+
+
 def add_new_student(name, grades_str):
     # Добавляет нового студента. Оценки передаются строкой через запятую (например: '4,5,3')
     try:
@@ -28,8 +36,8 @@ def add_new_student(name, grades_str):
     except ValueError:
         print("Ошибка: оценки должны быть числами через запятую, например: 4,5,3")
         return
-    
-    new_id = len(students_db) + 1
+
+    new_id = generate_new_id()
     new_student = {"id": new_id, "name": name, "grades": grades}
     students_db.append(new_student)
     print(f" Студент {name} успешно добавлен с ID {new_id}!")
