@@ -48,7 +48,6 @@ def delete_student(student_id):
     for st in students_db:
         if st["id"] == int(student_id):
             students_db.remove(st)
-    print(students_db)
 
 
 def print_report():
