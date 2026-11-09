@@ -43,6 +43,14 @@ def add_new_student(name, grades_str):
     print(f" Студент {name} успешно добавлен с ID {new_id}!")
 
 
+def delete_student(student_id):
+    #Удаление студента с заданным id
+    for st in students_db:
+        if st["id"] == int(student_id):
+            students_db.remove(st)
+    print(students_db)
+
+
 def print_report():
     # Выводит красивый отчет по всем студентам
     print("\n--- ОТЧЕТ УСПЕВАЕМОСТИ ---")
@@ -57,7 +65,8 @@ def main():
         print("1. Показать отчет")
         print("2. Найти студента по ID")
         print("3. Добавить студента")
-        print("4. Выход")
+        print("4. Удалить студента")
+        print("5. Выход")
 
         choice = input("Выберите действие: ")
 
@@ -75,6 +84,9 @@ def main():
             grades = input("Оценки через запятую (например: 4,5,3): ")
             add_new_student(name, grades)
         elif choice == "4":
+            s_id = input("Введите ID студента: ")
+            delete_student(s_id)
+        elif choice == "5":
             break
         else:
             print("Неверный пункт меню")
